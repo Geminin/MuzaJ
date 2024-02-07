@@ -1,6 +1,7 @@
 package muzyka.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 
 
 /**
@@ -28,6 +30,10 @@ public class Performer implements Serializable {
 	@Lob
 	private String name;
 
+	//bi-directional many-to-one association to Album
+	@OneToMany(mappedBy="performer")
+	private List<Album> albums;
+
 	public Performer() {
 	}
 
@@ -45,6 +51,28 @@ public class Performer implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Album> getAlbums() {
+		return this.albums;
+	}
+
+	public void setAlbums(List<Album> albums) {
+		this.albums = albums;
+	}
+
+	public Album addAlbum(Album album) {
+		getAlbums().add(album);
+		album.setPerformer(this);
+
+		return album;
+	}
+
+	public Album removeAlbum(Album album) {
+		getAlbums().remove(album);
+		album.setPerformer(null);
+
+		return album;
 	}
 
 }

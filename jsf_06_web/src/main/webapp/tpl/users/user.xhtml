@@ -10,19 +10,23 @@
         
         <h:form>
     <div class="card">
-        <p:dataTable var="o" value="#{orderdb.getFullListO()}">
-        
-            <p:column headerText="Order_Id">
-                <h:outputText value="#{o.oderId}" />
-            </p:column>
-
+        <p:dataTable var="u" value="#{userdb.getFullListU()}">
             <p:column headerText="User_id">
-                <h:outputText value="#(o.userId}" />
+                <h:outputText value="#{u.userId}" />
             </p:column>
 
-            <p:column headerText="Album_id">
-                <h:outputText value="#(o.albumId}" />
+            <p:column headerText="Role">
+                <h:outputText value="#{u.role}" />
             </p:column>
+            
+             <p:column headerText="Login">
+                <h:outputText value="#{u.login}" />
+            </p:column>
+            
+             <p:column headerText="Password">
+                <h:outputText value="#{u.password}" />
+            </p:column>
+
 
         </p:dataTable>
     </div>

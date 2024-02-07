@@ -13,9 +13,9 @@ import muzyka.entities.Album;
 
 @Stateless
 public class AlbumDao{
-	private final static String UNIT_NAME = "jsfcourse-simplePU";
+
 	
-	@PersistenceContext(unitName = UNIT_NAME)
+	@PersistenceContext
 	protected EntityManager em;
 	
 	public void create(Album album) {
@@ -34,11 +34,12 @@ public class AlbumDao{
 		return em.find(Album.class, id);
 	}
 	
+	
 	@SuppressWarnings("unchecked")
-	public List<Album> getFullList(){
+	public List<Album> getFullListOnly(){
 		List<Album> list = null;
 		
-		Query query = em.createQuery("SELECT a FROM Album a NATURAL JOIN performer");
+		Query query = em.createQuery("SELECT a FROM Album a");
 		
 		try {
 			list = query.getResultList();
@@ -67,7 +68,7 @@ public class AlbumDao{
     }
   
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<Album> getList(Map<String, Object> searchParams){
 		
 		List<Album> list = null;
