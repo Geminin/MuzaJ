@@ -1,26 +1,41 @@
-<ui:composition 
-	  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-	
-
-        
-        <h:form>
-    <div class="card">
-        <p:dataTable var="p" value="#{performerdb.getFullListP()}">
-            <p:column headerText="Performer_id">
-                <h:outputText value="#{p.performerId}" />
-            </p:column>
-
-            <p:column headerText="Name">
-                <h:outputText value="#{p.name}" />
-            </p:column>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 
-        </p:dataTable>
-    </div>
-</h:form>
+
+	<h:form>
+		<div class="card">
+			<p:commandButton value="Dodaj nowego wykonawce"
+				action="#{performerdb.newPerfromer()}" style="margin-bottom:1em;" />
+				
+			<p:dataTable var="p" value="#{performerdb.getFullListP()}">
+				<p:column headerText="Performer_id">
+					<h:outputText value="#{p.performerId}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{p.name}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="opcje" />
+					</f:facet>
+
+					<p:commandButton value="Edytuj"
+						action="#{performerdb.editPerformer(p)}" />
+
+					<p:commandButton value="Usuń"
+						action="#{performerdb.deletePerformer(p)}" update="@form" />
+
+
+				</p:column>
+
+
+			</p:dataTable>
+		</div>
+	</h:form>
 </ui:composition>

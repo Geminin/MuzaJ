@@ -10,6 +10,8 @@
         
         <h:form>
     <div class="card">
+    <p:commandButton value="Dodaj nową osobę"
+				action="#{userdb.newUser()}" style="margin-bottom:1em;" />
         <p:dataTable var="u" value="#{userdb.getFullListU()}">
             <p:column headerText="User_id">
                 <h:outputText value="#{u.userId}" />
@@ -26,6 +28,18 @@
              <p:column headerText="Password">
                 <h:outputText value="#{u.password}" />
             </p:column>
+            				<p:column>
+					<f:facet name="header">
+						<h:outputText value="opcje" />
+					</f:facet>
+
+					<p:commandButton value="Edytuj" action="#{userdb.editUser(u)}" />
+
+					<p:commandButton value="Usuń" action="#{userdb.deleteUser(u)}"
+						update="@form" />
+
+
+				</p:column>
 
 
         </p:dataTable>

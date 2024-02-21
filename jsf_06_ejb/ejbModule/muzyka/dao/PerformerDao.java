@@ -12,9 +12,12 @@ import muzyka.entities.Performer;
 @Stateless
 public class PerformerDao{
 	private final static String UNIT_NAME = "jsfcourse-simplePU";
-	
+
+	// Dependency injection (no setter method is needed)
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
+	
+	
 	
 	public void create(Performer performer) {
 		em.persist(performer);

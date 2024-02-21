@@ -1,46 +1,59 @@
-<ui:composition 
-	  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-	
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-        
-        <h:form>
-    <div class="card">
-        <p:dataTable var="a" value="#{albumdb.getFullListA()}"
-        			rows="6" 
-        			paginator="true" paginatorPosition="both"
-                    rowsPerPageTemplate="6,14,16"
-                    ppaginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                    listIcon="pi pi-bars">
-            <p:column headerText="Id">
-                <h:outputText value="#{a.albumId}" />
-            </p:column>
-            
-             <p:column headerText="Tytuł">
-                <h:outputText value="#{a.title}" />
-            </p:column>
 
-            <p:column headerText="Genre">
-                <h:outputText value="#{a.genre}" />
-            </p:column>
 
-            <p:column headerText="Performer_id">
-                <h:outputText value="#{a.performer.performerId}" />
-            </p:column>
+	<h:form>
+		<div class="card">
+			<p:commandButton value="Dodaj nowy album"
+				action="#{albumdb.newAlbum()}" style="margin-bottom:1em;" />
 
-            <p:column headerText="Cena">
-                <h:outputText value="#{a.price}" />
-            </p:column>
-           
-            <p:column headerText="Utwory">
-                <h:outputText value="#{a.tracks}" />
-            </p:column>
-        </p:dataTable>
-    </div>
-</h:form>
+			<p:dataTable var="a" value="#{albumdb.getFullListA()}" rows="14"
+				paginator="true" paginatorPosition="both"
+				rowsPerPageTemplate="6,14,16"
+				ppaginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				listIcon="pi pi-bars">
+				<p:column headerText="Id">
+					<h:outputText value="#{a.albumId}" />
+				</p:column>
+
+				<p:column headerText="Tytuł">
+					<h:outputText value="#{a.title}" />
+				</p:column>
+
+				<p:column headerText="Genre">
+					<h:outputText value="#{a.genre}" />
+				</p:column>
+
+				<p:column headerText="Performer_id">
+					<h:outputText value="#{a.performer.name}" />
+				</p:column>
+
+				<p:column headerText="Cena">
+					<h:outputText value="#{a.price}" />
+				</p:column>
+
+				<p:column headerText="Utwory">
+					<h:outputText value="#{a.tracks}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="opcje" />
+					</f:facet>
+
+					<p:commandButton value="Edytuj" action="#{albumdb.editAlbum(a)}" />
+
+					<p:commandButton value="Usuń" action="#{albumdb.deleteAlbum(a)}"
+						update="@form" />
+
+
+				</p:column>
+			</p:dataTable>
+		</div>
+	</h:form>
 </ui:composition>

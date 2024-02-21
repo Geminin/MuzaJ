@@ -17,6 +17,7 @@ import muzyka.entities.Zam;
 @Named
 @RequestScoped
 public class CartBB {
+	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	@Inject
 	ExternalContext extcontext;
@@ -24,14 +25,20 @@ public class CartBB {
 	@EJB
 	OrderDao orderDao;
 
+	
+	@SuppressWarnings("unchecked")
 	public List<Zam> getOrderList() {
 
 		RemoteClient<Uzy> remoteClient = RemoteClient.load((HttpSession)extcontext.getSession(true));
-		List<Zam> list = orderDao.getFullList(remoteClient.getDetails());
+		List<Zam> list = orderDao.getOrderList(remoteClient.getDetails());
 		return list;
 		
-		
-
+	
+	}
+	
+	public String deleteOrder(Zam zam) {
+		orderDao.remove(zam);
+		return PAGE_STAY_AT_THE_SAME;
 	}
 
 }

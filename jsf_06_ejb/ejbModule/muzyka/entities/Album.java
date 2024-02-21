@@ -1,6 +1,7 @@
 package muzyka.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+
 
 
 /**
@@ -25,12 +28,12 @@ public class Album implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="album_id")
-	private int albumId;
+	private Integer albumId;
 
 	@Lob
 	private String genre;
 
-	private int price;
+	private Integer price;
 
 	@Lob
 	private String title;
@@ -43,14 +46,18 @@ public class Album implements Serializable {
 	@JoinColumn(name="performer_id")
 	private Performer performer;
 
+	//bi-directional many-to-one association to Zam
+	@OneToMany(mappedBy="album")
+	private List<Zam> zams;
+
 	public Album() {
 	}
 
-	public int getAlbumId() {
+	public Integer getAlbumId() {
 		return this.albumId;
 	}
 
-	public void setAlbumId(int albumId) {
+	public void setAlbumId(Integer albumId) {
 		this.albumId = albumId;
 	}
 
@@ -62,11 +69,11 @@ public class Album implements Serializable {
 		this.genre = genre;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -92,6 +99,28 @@ public class Album implements Serializable {
 
 	public void setPerformer(Performer performer) {
 		this.performer = performer;
+	}
+
+	public List<Zam> getZams() {
+		return this.zams;
+	}
+
+	public void setZams(List<Zam> zams) {
+		this.zams = zams;
+	}
+
+	public Zam addZam(Zam zam) {
+		getZams().add(zam);
+		zam.setAlbum(this);
+
+		return zam;
+	}
+
+	public Zam removeZam(Zam zam) {
+		getZams().remove(zam);
+		zam.setAlbum(null);
+
+		return zam;
 	}
 
 }

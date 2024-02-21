@@ -10,7 +10,6 @@ import jakarta.faces.simplesecurity.RemoteClient;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 import muzyka.dao.UserDao;
 import muzyka.entities.Uzy;
 

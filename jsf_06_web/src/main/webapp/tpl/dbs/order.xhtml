@@ -1,30 +1,35 @@
-<ui:composition 
-	  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-	
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-        
-        <h:form>
-    <div class="card">
-        <p:dataTable var="o" value="#{orderdb.getFullListO()}">
-        
-            <p:column headerText="Order_Id">
-                <h:outputText value="#{o.oderId}" />
-            </p:column>
 
-            <p:column headerText="User_id">
-                <h:outputText value="#(o.userId}" />
-            </p:column>
 
-            <p:column headerText="Album_id">
-                <h:outputText value="#(o.albumId}" />
-            </p:column>
+	<h:form>
+		<div class="card">
+			<p:commandButton value="Dodaj nową osobę"
+				action="#{albumdb.newAlbum()}" style="margin-bottom:1em;" />
+			<p:dataTable var="o" value="#{orderdb.getFullListO()}">
 
-        </p:dataTable>
-    </div>
-</h:form>
+				<p:column headerText="Order_Id">
+					<h:outputText value="#{o.oderId}" />
+				</p:column>
+
+				<p:column headerText="User_id">
+					<h:outputText value="#{o.uzy.login}" />
+				</p:column>
+
+				<p:column headerText="Album_id">
+					<h:outputText value="#{o.album.title}" />
+				</p:column>
+
+
+
+				
+
+			</p:dataTable>
+		</div>
+	</h:form>
 </ui:composition>

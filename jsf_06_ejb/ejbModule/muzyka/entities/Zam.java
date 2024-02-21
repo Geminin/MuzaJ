@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 
 
@@ -22,39 +24,43 @@ public class Zam implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="oder_id")
-	private int oderId;
+	private Integer oderId;
 
-	@Column(name="album_id")
-	private int albumId;
+	//bi-directional many-to-one association to Album
+	@ManyToOne
+	@JoinColumn(name="album_id")
+	private Album album;
 
-	@Column(name="user_id")
-	private int userId;
+	//bi-directional many-to-one association to Uzy
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private Uzy uzy;
 
 	public Zam() {
 	}
 
-	public int getOderId() {
+	public Integer getOderId() {
 		return this.oderId;
 	}
 
-	public void setOderId(int oderId) {
+	public void setOderId(Integer oderId) {
 		this.oderId = oderId;
 	}
 
-	public int getAlbumId() {
-		return this.albumId;
+	public Album getAlbum() {
+		return this.album;
 	}
 
-	public void setAlbumId(int albumId) {
-		this.albumId = albumId;
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public Uzy getUzy() {
+		return this.uzy;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUzy(Uzy uzy) {
+		this.uzy = uzy;
 	}
 
 }

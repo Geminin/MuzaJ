@@ -1,6 +1,7 @@
 package muzyka.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 
 
 /**
@@ -34,14 +36,18 @@ public class Uzy implements Serializable {
 	@Lob
 	private String role;
 
+	//bi-directional many-to-one association to Zam
+	@OneToMany(mappedBy="uzy")
+	private List<Zam> zams;
+
 	public Uzy() {
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -67,6 +73,28 @@ public class Uzy implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<Zam> getZams() {
+		return this.zams;
+	}
+
+	public void setZams(List<Zam> zams) {
+		this.zams = zams;
+	}
+
+	public Zam addZam(Zam zam) {
+		getZams().add(zam);
+		zam.setUzy(this);
+
+		return zam;
+	}
+
+	public Zam removeZam(Zam zam) {
+		getZams().remove(zam);
+		zam.setUzy(null);
+
+		return zam;
 	}
 
 }

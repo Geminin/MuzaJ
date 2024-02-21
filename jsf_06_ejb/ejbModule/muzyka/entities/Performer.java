@@ -37,11 +37,11 @@ public class Performer implements Serializable {
 	public Performer() {
 	}
 
-	public int getPerformerId() {
+	public Integer getPerformerId() {
 		return this.performerId;
 	}
 
-	public void setPerformerId(int performerId) {
+	public void setPerformerId(Integer performerId) {
 		this.performerId = performerId;
 	}
 

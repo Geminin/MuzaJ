@@ -95,26 +95,32 @@
 	<div class="jumbotron top-space">
 		<div class="container">
 
-			<div class="card product">
-				<h:form id="form">
+			<h:form>
+				<div class="card">
 
-					<p:dataTable var="o" value="#{CartBB.getOrderList()}">
+					<p:dataTable var="o" value="#{cartBB.getOrderList()}">
 
-						<p:column headerText="Order_Id">
-							<h:outputText value="#{o.oderId}" />
+
+
+						<p:column headerText="Lista">
+							<h:outputText value="#{o.album.title} by #{o.album.performer.name}" />
+						</p:column>
+						<p:column headerText="Cena">
+							<h:outputText value="#{o.album.price} zł"/>
+						</p:column>
+						<p:column>
+							<p:commandButton value="Usuń z koszyka" action="cartBB.deleteOrder(o)" update="@form"/>
 						</p:column>
 
-						<p:column headerText="User_id">
-							<h:outputText value="#(o.userId}" />
-						</p:column>
 
-						<p:column headerText="Album_id">
-							<h:outputText value="#(o.albumId}" />
-						</p:column>
+
+
+
+
 
 					</p:dataTable>
-				</h:form>
-			</div>
+				</div>
+			</h:form>
 		</div>
 
 	</div>
